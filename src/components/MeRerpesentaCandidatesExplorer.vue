@@ -3,20 +3,27 @@
     <h1>MeRerpesentaCandidatesExplorer</h1>
     <h2>{{ msg }}</h2>
     <div id='gender_checkboxes'>
+      <h3>por genero:</h3>
       <ul class="filtros">
         <li v-for="gender in genderList">
           <input type="checkbox" :id="gender.str_id" :value="gender.label" v-model="checkedGenders">
           <label :for="gender.str_id">{{ gender.label }}</label>
         </li>
       </ul>
-      <span>Checked genders: {{ checkedGenders }}</span>
+      <!-- <span>Checked genders: {{ checkedGenders }}, {{ checkedGenders.length}}</span> -->
     </div>
+    <h2>Seus candidatos sao:</h2>
     <ul class="results">
-      <li v-for="item in candidateList">
-        <div v-if="checkedGenders.indexOf(item.gender) !== -1">
-          name: {{ item.name }}, gender: {{ item.gender }}<br>
-        </div>
-      </li>
+      <template v-if="checkedGenders.length == 0">
+        <li v-for="item in candidateList">
+          name: {{ item.name }}, gender: {{ item.gender }}
+        </li>
+      </template>
+      <template v-else>
+        <li v-for="item in candidateList" v-if="checkedGenders.indexOf(item.gender) !== -1">
+          name: {{ item.name }}, gender: {{ item.gender }}
+        </li>
+      </template>
     </ul>
   </div>
 </template>
