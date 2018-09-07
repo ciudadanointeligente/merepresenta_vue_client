@@ -1,6 +1,6 @@
 # merepresenta-vue-client
 
-> a vuejs client for merepresenta
+> a vuejs 2 client for merepresenta
 
 ## Build Setup
 
