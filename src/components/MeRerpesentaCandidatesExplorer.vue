@@ -56,10 +56,17 @@
       </template>
     </ul>
 
+    <div class="">
+      <span>
+        {{ info }}
+      </span>
+
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'MeRerpesentaCandidatesExplorer',
   data () {
@@ -73,6 +80,7 @@ export default {
       checkedGenders: [],
       checkedLgbt: [],
       checkedRaces: [],
+      info: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa'
     }
   },
   computed: {
@@ -87,6 +95,13 @@ export default {
 
       return this.testList.sort(compare);
     }
+  },
+  mounted () {
+    console.log("mounted part running");
+    axios
+      .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+      .then(response => (this.info = response))
+      .catch(function (error) { console.log(error); });
   }
 }
 </script>
